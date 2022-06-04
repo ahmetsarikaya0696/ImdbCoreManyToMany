@@ -1,0 +1,87 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Top Movies</h1>
+<hr />
+<div class="row">
+    <div class="col-sm-3">
+        <h4 class="mt-1">Genres</h4>
+        <hr />
+        <div class="list-group">
+            <a asp-action="Index" class="list-group-item list-group-item-action @(Model.GenreId.HasValue ? "" : "active")">All</a>
+            @foreach (var genre in Model.Genres)
+            {
+                <a asp-action="IndexWithGenre" asp-route-genreName="@genre.Name" class="list-group-item list-group-item-action d-flex align-items-baseline @(genre.Id == Model.GenreId ? "active" : "")">
+                    @genre.Name
+                    <span class="badge badge-secondary ml-auto">@genre.MovieCount</span>
+                </a>
+            }
+        </div>
+
+    </div>
+    <div class="col-sm-9">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Rating</th>
+                    <th>Genres</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var movie in Model.Movies)
+                {
+                    <tr>
+                        <td>@movie.Id</td>
+                        <td><img src="@movie.ImageUrl" alt="@movie.Name" /></td>
+                        <td>
+                            <div class="d-flex justify-content-between align-items-start">
+                                <a target="_blank" href="https://www.imdb.com/title/@movie.ImdbId/">
+                                    @movie.Name
+                                </a>
+                                <a href="#">
+                                    <i data-fav="@movie.Id" data-toggle="tooltip" class="fa-regular fa-heart"></i>
+                                    @*<i class="fa-solid fa-heart"></i>*@
+                                </a>
+                            </div>
+                        </td>
+                        <td>@movie.Year</td>
+                        <td>@movie.Rating</td>
+                        <td>@string.Join(", ", movie.Genres.Select(x => x.Name))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+const { event } = require("jquery");
+
+        $('.table').DataTable({
+            "columnDefs": [
+                { "searchable": false, "targets": 0 }
+            ]
+        });
+
+        $("body").on("click", ["data-fav"], (event) => {
+            event.preventDefault();
+            var movieId = $(this).data("fav");
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Toggle","Favorites")",
+                data: { movieId },
+                success: (data) => { alert(data.favorited); }
+            })
+        });
+
+    </script>
+}
+
