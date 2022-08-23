@@ -10,13 +10,13 @@ namespace ImdbCoreManyToMany.Models
         }
 
         public DbSet<Movie> Movies { get; set; }
-        public DbSet<Genre>  Genres { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Movie>()
                 .Property(x => x.Rating)
-                .HasPrecision(3,1);
+                .HasPrecision(3, 1);
         }
     }
 }

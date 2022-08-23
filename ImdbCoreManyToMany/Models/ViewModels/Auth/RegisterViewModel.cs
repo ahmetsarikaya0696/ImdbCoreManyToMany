@@ -7,7 +7,7 @@ namespace ImdbCoreManyToMany.Models.ViewModels.Auth
     {
         [Required, MaxLength(50)]
         public string Name { get; set; }
-        
+
         [Required, MaxLength(50)]
         public string Surname { get; set; }
 
@@ -20,7 +20,7 @@ namespace ImdbCoreManyToMany.Models.ViewModels.Auth
         [Required, MaxLength(15)]
         public string Password { get; set; }
 
-        [Compare(nameof(Password), ErrorMessage ="Şifreler uyuşmuyor.")]
+        [Compare(nameof(Password), ErrorMessage = "Şifreler uyuşmuyor.")]
         public string RePassword { get; set; }
 
         [Required]

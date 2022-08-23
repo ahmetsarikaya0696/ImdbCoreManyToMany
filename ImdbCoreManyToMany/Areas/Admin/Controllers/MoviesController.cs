@@ -1,12 +1,11 @@
-﻿using System;
+﻿using ImdbCoreManyToMany.Areas.Admin.Models;
+using ImdbCoreManyToMany.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ImdbCoreManyToMany.Models;
-using ImdbCoreManyToMany.Areas.Admin.Models;
 
 namespace ImdbCoreManyToMany.Areas.Admin.Controllers
 {

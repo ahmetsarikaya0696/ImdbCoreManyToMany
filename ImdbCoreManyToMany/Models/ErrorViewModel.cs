@@ -1,5 +1,3 @@
-using System;
-
 namespace ImdbCoreManyToMany.Models
 {
     public class ErrorViewModel
