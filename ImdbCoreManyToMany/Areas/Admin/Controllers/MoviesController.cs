@@ -76,7 +76,7 @@ namespace ImdbCoreManyToMany.Areas.Admin.Controllers
                 {
                     movie.Genres.Add(_context.Genres.Find(genreId));
                 }
-                _context.Movies.Add(movie);
+                await _context.Movies.AddAsync(movie);
                 _context.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
